@@ -1,0 +1,22 @@
+name: Test Action
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "::notice title=Test Result::113/113 test successful"
+      - run: echo "::warning title=Test Result::113/113 test successful, 2 re-runs"
+      - run: echo "::error title=Test Result::111/113 test successful, 2 re-runs, 1 failure"
+      - run: >
+          echo "::error title=foo::test_floating_ip_mass_failover[debian-10]: AssertionError: 32.08087446540594s > 30s"
+      - run: >
+          echo "::error::test_public_ip_address_on_all_images[debian-12-IPv4] AssertionError: ping failed on at-804fb110-test-public-ip-address-on-all-images-debian-12-ipv: PING 2a06:c00::1(2a06:c00::1) 56 data bytes"
+      - run: echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+      - run: echo "This went *real* well" >> $GITHUB_STEP_SUMMARY
+      - run: echo "```bash" >> $GITHUB_STEP_SUMMARY
+      - run: echo "echo foo" >> $GITHUB_STEP_SUMMARY
+      - run: echo "```" >> $GITHUB_STEP_SUMMARY
